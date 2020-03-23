@@ -1,0 +1,69 @@
+[Update cmake to 3.x]
+[Update gcc if possible]
+[The boost script requires wget]
+
+
+
+################################################
+# Part 2: clone the dependencies               #
+################################################
+# set the parent directory that we will build in
+export BUILD_DIR=~/repo
+
+
+#clone the dependencies. 
+cd $BUILD_DIR
+git clone https://github.com/relic-toolkit/relic.git
+git clone https://github.com/ladnir/cryptoTools
+
+# Somehow get the DiSE source code.
+
+# We require the code has the following structure
+# 
+# $BUILD_DIR/relic/
+# $BUILD_DIR/cryptoTools/
+# $BUILD_DIR/DiSE/
+
+
+################################################
+# Part 3: Build and install Relic              #
+################################################
+
+
+cd relic
+
+cmake . -D MULTI=PTHREAD
+make -j
+sudo make install
+
+# on windows you can build relic with -D MULTI=OPENMP
+# note, you can install to a non-sudo location by calling "make DESTDIR=<path/to/install> install"
+
+
+################################################
+# Part 4: build boost and cryptoTools          #
+################################################
+
+cd ../cryptoTools/thirdparty/linux
+
+# download and build boost to this folder. If you 
+# can't run scripts, run the commands inside...
+
+bash boost.get
+
+cd ../..
+
+cmake . -D ENABLE_RELIC=ON 
+make -j
+
+
+################################################
+# Part 5: build DiSE                           #
+################################################
+
+cd ../DiSE-source/dEnc
+cmake .
+make -j
+
+# Run the unit tests
+./bin/dEncFrontent -u
