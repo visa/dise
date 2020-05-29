@@ -1,7 +1,6 @@
-# Dise
-This repository contains the reference implementation of [DiSE: Distributed Symmetric-key Encryption](https://eprint.iacr.org/2018/727). This is only a proof of concept implementation and should not be considered production grade. Use at your own risk.
+# DiSE
 
-Authors: Shashank Agrawal and Payman Mohassel and Pratyay Mukherjee and Peter Rindal
+This repository contains the reference implementation of [DiSE: Distributed Symmetric-key Encryption](https://eprint.iacr.org/2018/727). This is only a proof of concept implementation and should not be considered production grade. Use at your own risk. 
 
 Threshold cryptography provides a mechanism for protecting secret keys by sharing them among multiple parties, who then jointly perform cryptographic operations. An attacker who corrupts upto a threshold number of parties cannot recover the secrets or violate security. Prior works in this space have mostly focused on definitions and constructions for public-key cryptography and digital signatures, and thus do not capture the security concerns and efficiency challenges of symmetric-key based applications which commonly use long-term (unprotected) master keys to protect data at rest, authenticate clients on enterprise networks, and secure data and payments on IoT devices.
 
@@ -13,7 +12,7 @@ We propose a generic construction of threshold authenticated encryption based on
 ### Part 1: clone the dependencies               
 Set the parent directory that we will build in
 ```
-Git clone https://github.com/visa/dise.git
+git clone https://github.com/visa/dise.git
 git clone https://github.com/relic-toolkit/relic.git
 git clone https://github.com/ladnir/cryptoTools
 ```
@@ -21,7 +20,7 @@ git clone https://github.com/ladnir/cryptoTools
 We require the code has the following structure 
 ```
 $BUILD_DIR/cryptoTools/
-$BUILD_DIR/DiSE/
+$BUILD_DIR/dise/
 ```
 
 ### Part 2: Build and install Relic              
@@ -51,7 +50,7 @@ make -j
 
 ### Part 4: build DiSE                           
 ```
-cd ../DiSE-source/dEnc
+cd ../dise
 cmake .
 make -j
 ```
